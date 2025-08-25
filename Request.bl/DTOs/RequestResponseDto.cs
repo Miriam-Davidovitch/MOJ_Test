@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Requests.bl.DTOs
 {
-    public class RequestDto
+    public class RequestResponseDto
     {
         public int RequestID { get; set; }
         public string RequestorName { get; set; } = string.Empty;

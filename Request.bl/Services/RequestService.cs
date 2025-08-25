@@ -16,19 +16,19 @@ namespace Requests.bl
             _mapper = mapper;
         }
 
-        public async Task<List<RequestDto>> GetAllRequestsAsync()
+        public async Task<List<RequestResponseDto>> GetAllRequestsAsync()
         {
             var requests = await _repository.GetAllRequestsAsync();
-            return _mapper.Map<List<RequestDto>>(requests);
+            return _mapper.Map<List<RequestResponseDto>>(requests);
         }
 
-        public async Task<RequestDto> CreateRequestAsync(CreateRequestDto requestDto)
+        public async Task<RequestResponseDto> CreateRequestAsync(CreateRequestDto requestDto)
         {
             try
             {
                 var request = _mapper.Map<Request>(requestDto);
                 var createdRequest = await _repository.CreateRequestAsync(request);
-                return _mapper.Map<RequestDto>(createdRequest);
+                return _mapper.Map<RequestResponseDto>(createdRequest);
             }
             catch (Exception ex)
             {

@@ -11,8 +11,8 @@ namespace Requests.bl.Mappers
             // CreateRequestDto -> Request
             CreateMap<CreateRequestDto, Requests.dal.Models.Request>();
 
-            // Request -> RequestDto
-            CreateMap<Requests.dal.Models.Request, RequestDto>();
+            // Request -> RequestResponseDto
+            CreateMap<Requests.dal.Models.Request, RequestResponseDto>();
 
 
         }

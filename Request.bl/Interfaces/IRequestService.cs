@@ -5,7 +5,7 @@ namespace Requests.bl
 {
     public interface IRequestService
     {
-        Task<List<RequestDto>> GetAllRequestsAsync();
-        Task<RequestDto> CreateRequestAsync(CreateRequestDto requestDto);
+        Task<List<RequestResponseDto>> GetAllRequestsAsync();
+        Task<RequestResponseDto> CreateRequestAsync(CreateRequestDto requestDto);
     }
 }

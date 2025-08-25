@@ -18,7 +18,7 @@ namespace Requests.api.Controllers
         }
 
         [HttpGet("list")]
-        public async Task<ActionResult<List<RequestDto>>> GetAllRequests()
+        public async Task<ActionResult<List<RequestResponseDto>>> GetAllRequests()
         {
             try
             {
