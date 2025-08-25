@@ -14,23 +14,41 @@
       (requestAdded)="onRequestAdded()"
       (cancel)="onCancelAdd()">
     </app-add-request>
+
+    <!-- הודעת טעינה -->
+    <div *ngIf="isLoading && !showAddForm" class="loading-message">
+      <div class="spinner"></div>
+      <p>טוען נתונים...</p>
+    </div>
+
+    <!-- הודעת שגיאה -->
+    <div *ngIf="errorMessage && !showAddForm" class="error-container">
+      <div class="error-message">
+        <div class="error-icon">⚠️</div>
+        <h3>אופס! יש בעיה</h3>
+        <p>{{ errorMessage }}</p>
+        <button (click)="retryLoadRequests()" class="retry-btn">
+          נסה שוב
+        </button>
+      </div>
+    </div>
     
-    <table class="requests-table" *ngIf="!showAddForm">
+    <table class="requests-table" *ngIf="!showAddForm && !isLoading && !errorMessage">
       <thead>
         <tr>
           <th>קוד פנייה</th>
-          <th>שם המגיש</th>
           <th>נושא</th>
           <th>תיאור</th>
+          <th>שם המגיש</th>
           <th>תאריך יצירה</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let request of requests">
           <td>{{request.requestID}}</td>
-          <td>{{request.requestorName}}</td>
           <td>{{request.requestTopic}}</td>
           <td>{{request.requestDescription}}</td>
+          <td>{{request.requestorName}}</td>
           <td>{{request.requestCreatedAt | date:'dd/MM/yyyy HH:mm'}}</td>
         </tr>
       </tbody>

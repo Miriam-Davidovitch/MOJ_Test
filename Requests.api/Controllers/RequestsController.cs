@@ -9,13 +9,15 @@ namespace Requests.api.Controllers
     public class RequestsController : ControllerBase
     {
         private readonly IRequestService _requestService;
+        private readonly ILogger<RequestsController> _logger;
 
-        public RequestsController(IRequestService requestService)
+        public RequestsController(IRequestService requestService, ILogger<RequestsController> logger)
         {
             _requestService = requestService;
+            _logger = logger;
         }
 
-        [HttpGet]
+        [HttpGet("list")]
         public async Task<ActionResult<List<RequestDto>>> GetAllRequests()
         {
             try
@@ -25,25 +27,26 @@ namespace Requests.api.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error getting requests");
                 return StatusCode(500, new { Success = false, Message = "שגיאה בקבלת הבקשות" });
             }
         }
 
-        [HttpPost]
+        [HttpPost("create")]
         public async Task<IActionResult> CreateRequest([FromBody] CreateRequestDto dto)
         {
-            if (string.IsNullOrWhiteSpace(dto.RequestorName))
-                return BadRequest(new { Success = false, Message = "שם המבקש חובה" });
-
-            if (!string.IsNullOrWhiteSpace(dto.RequestTopic) && dto.RequestTopic.Length < 5)
-                return BadRequest(new { Success = false, Message = "נושא הפניה חייב להיות לפחות 5 תווים" });
-
-            if (dto.RequestDescription?.Length > 255)
-                return BadRequest(new { Success = false, Message = "התאור ארוך מדי" });
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values
+                    .SelectMany(v => v.Errors)
+                    .Select(e => e.ErrorMessage)
+                    .ToList();
+                return BadRequest(new { Success = false, Message = string.Join(", ", errors) });
+            }
 
             try
             {
-                var request = await _requestService.CreateRequestAsync(dto.RequestorName, dto.RequestDescription, dto.RequestTopic);
+                var request = await _requestService.CreateRequestAsync(dto);
                 
                 if (request != null && request.RequestID > 0)
                     return Ok(new { Success = true, Message = "בקשה נוצרה בהצלחה", RequestId = request.RequestID });
@@ -52,6 +55,7 @@ namespace Requests.api.Controllers
             }
             catch (Exception ex)
             {
+                _logger.LogError(ex, "Error creating request for {RequestorName}", dto.RequestorName);
                 return StatusCode(500, new { Success = false, Message = "שגיאה פנימית בשרת" });
             }
         }

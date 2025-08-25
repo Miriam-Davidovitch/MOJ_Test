@@ -12,10 +12,10 @@ export class RequestsService {
   constructor(private http: HttpClient) { }
 
   getAllRequests(): Observable<Request[]> {
-    return this.http.get<Request[]>(`${this.apiUrl}/Requests`);
+    return this.http.get<Request[]>(`${this.apiUrl}/Requests/list`);
   }
 
   createRequest(request: any): Observable<any> {
-    return this.http.post<any>(`${this.apiUrl}/Requests`, request);
+    return this.http.post<any>(`${this.apiUrl}/Requests/create`, request);
   }
 }

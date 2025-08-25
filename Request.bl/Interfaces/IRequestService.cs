@@ -6,6 +6,6 @@ namespace Requests.bl
     public interface IRequestService
     {
         Task<List<RequestDto>> GetAllRequestsAsync();
-        Task<RequestDto> CreateRequestAsync(string requestorName, string? requestDescription, string? requestTopic);
+        Task<RequestDto> CreateRequestAsync(CreateRequestDto requestDto);
     }
 }

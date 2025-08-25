@@ -1,12 +1,10 @@
 <div class="form-container">
   <h3>הוספת בקשה חדשה</h3>
   
-  <!-- הודעת הצלחה -->
   <div *ngIf="successMessage" class="alert alert-success">
     {{ successMessage }}
   </div>
 
-  <!-- הודעת שגיאה כללית -->
   <div *ngIf="errors['server']" class="alert alert-error">
     {{ errors['server'] }}
   </div>

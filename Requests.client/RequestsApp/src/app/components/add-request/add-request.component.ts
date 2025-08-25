@@ -28,12 +28,10 @@ export class AddRequestComponent {
   onSubmit(): void {
     this.clearMessages();
     
-    // סימון כל השדות כמושים
     this.touched['requestorName'] = true;
     this.touched['requestTopic'] = true;
     this.touched['requestDescription'] = true;
     
-    // בדיקת כל השדות
     this.validateField('requestorName');
     this.validateField('requestTopic');
     this.validateField('requestDescription');

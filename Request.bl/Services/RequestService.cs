@@ -22,18 +22,11 @@ namespace Requests.bl
             return _mapper.Map<List<RequestDto>>(requests);
         }
 
-        public async Task<RequestDto> CreateRequestAsync(string requestorName, string? requestDescription, string? requestTopic)
+        public async Task<RequestDto> CreateRequestAsync(CreateRequestDto requestDto)
         {
             try
             {
-                var createDto = new CreateRequestDto
-                {
-                    RequestorName = requestorName,
-                    RequestDescription = requestDescription,
-                    RequestTopic = requestTopic
-                };
-
-                var request = _mapper.Map<Request>(createDto);
+                var request = _mapper.Map<Request>(requestDto);
                 var createdRequest = await _repository.CreateRequestAsync(request);
                 return _mapper.Map<RequestDto>(createdRequest);
             }

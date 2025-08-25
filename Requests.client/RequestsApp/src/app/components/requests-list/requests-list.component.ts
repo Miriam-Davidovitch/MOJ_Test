@@ -14,6 +14,8 @@ import { AddRequestComponent } from '../add-request/add-request.component';
 export class RequestsListComponent implements OnInit {
   requests: Request[] = [];
   showAddForm: boolean = false;
+  errorMessage: string = '';
+  isLoading: boolean = false;
 
   constructor(private requestsService: RequestsService) { }
 
@@ -22,13 +24,17 @@ export class RequestsListComponent implements OnInit {
   }
 
   loadRequests(): void {
+    this.isLoading = true;
+    this.errorMessage = '';
+    
     this.requestsService.getAllRequests().subscribe({
       next: (data) => {
         this.requests = data;
-        console.log(this.requests);
+        this.isLoading = false;
       },
       error: (error) => {
-        console.error('שגיאה בטעינת הנתונים:', error);
+        this.errorMessage = 'שגיאה בטעינת הנתונים. אנא נסו שוב מאוחר יותר.';
+        this.isLoading = false;
       }
     });
   }
@@ -44,5 +50,9 @@ export class RequestsListComponent implements OnInit {
 
   onCancelAdd(): void {
     this.showAddForm = false;
+  }
+
+  retryLoadRequests(): void {
+    this.loadRequests();
   }
 }
