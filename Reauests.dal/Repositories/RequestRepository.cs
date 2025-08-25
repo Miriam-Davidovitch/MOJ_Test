@@ -16,7 +16,7 @@ namespace Reauests.dal
         {
             try
             {
-                return await _context.Requests.ToListAsync();
+                return await _context.RequestsTbl.ToListAsync();
             }
             catch (Exception ex)
             {
@@ -28,7 +28,7 @@ namespace Reauests.dal
         {
             try
             {
-                _context.Requests.Add(request);
+                _context.RequestsTbl.Add(request);
                 await _context.SaveChangesAsync();
                 return request;
             }

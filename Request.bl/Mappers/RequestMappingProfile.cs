@@ -9,7 +9,9 @@ namespace Requests.bl.Mappers
         public RequestMappingProfile()
         {
             // CreateRequestDto -> Request
-            CreateMap<CreateRequestDto, Requests.dal.Models.Request>();
+            CreateMap<CreateRequestDto, Requests.dal.Models.Request>()
+                .ForMember(dest => dest.RequestID, opt => opt.Ignore())
+                .ForMember(dest => dest.RequestCreatedAt, opt => opt.Ignore());
 
             // Request -> RequestDto
             CreateMap<Requests.dal.Models.Request, RequestDto>();

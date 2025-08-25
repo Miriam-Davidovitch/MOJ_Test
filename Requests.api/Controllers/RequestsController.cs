@@ -32,18 +32,18 @@ namespace Requests.api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateRequest([FromBody] CreateRequestDto dto)
         {
-            if (string.IsNullOrWhiteSpace(dto.Name))
-                return BadRequest(new { Success = false, Message = "שם הבקשה חובה" });
+            if (string.IsNullOrWhiteSpace(dto.RequestorName))
+                return BadRequest(new { Success = false, Message = "שם המבקש חובה" });
 
-            if (dto.Name.Length > 255)
-                return BadRequest(new { Success = false, Message = "שם הבקשה ארוך מדי" });
+            if (dto.RequestDescription.Length > 255)
+                return BadRequest(new { Success = false, Message = "התאור ארוך מדי" });
 
             try
             {
-                var request = await _requestService.CreateRequestAsync(dto);
+                var request = await _requestService.CreateRequestAsync(dto.RequestorName, dto.RequestDescription, dto.RequestTopic);
                 
-                if (request != null && request.Code > 0)
-                    return Ok(new { Success = true, Message = "בקשה נוצרה בהצלחה", RequestId = request.Code });
+                if (request != null && request.RequestID > 0)
+                    return Ok(new { Success = true, Message = "בקשה נוצרה בהצלחה", RequestId = request.RequestID });
                 else
                     return BadRequest(new { Success = false, Message = "שגיאה ביצירת הבקשה" });
             }

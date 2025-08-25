@@ -16,7 +16,7 @@ public partial class RequestDbContext : DbContext
     {
     }
 
-    public virtual DbSet<Request> Requests { get; set; }
+    public virtual DbSet<Request> RequestsTbl { get; set; }
 
     // Connection string is now configured in Program.cs
 
@@ -24,13 +24,13 @@ public partial class RequestDbContext : DbContext
     {
         modelBuilder.Entity<Request>(entity =>
         {
-            entity.HasKey(e => e.Code).HasName("PK__Requests__A25C5AA62876B17D");
+            entity.ToTable("RequestsTbl");
+            entity.HasKey(e => e.RequestID);
 
-            entity.Property(e => e.CreatedAt).HasDefaultValueSql("(getdate())");
-            entity.Property(e => e.Description)
-                .HasMaxLength(255)
-                .HasColumnName("description");
-            entity.Property(e => e.Name).HasMaxLength(255);
+            entity.Property(e => e.RequestCreatedAt).HasDefaultValueSql("(getdate())");
+            entity.Property(e => e.RequestorName).HasMaxLength(255).IsRequired();
+            entity.Property(e => e.RequestDescription).HasMaxLength(255);
+            entity.Property(e => e.RequestTopic).HasMaxLength(255);
         });
 
         OnModelCreatingPartial(modelBuilder);

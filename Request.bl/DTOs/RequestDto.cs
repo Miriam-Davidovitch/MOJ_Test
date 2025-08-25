@@ -8,10 +8,10 @@ namespace Requests.bl.DTOs
 {
     public class RequestDto
     {
-        public int Code { get; set; }
-        public string Name { get; set; } = string.Empty;
-        public string? Description { get; set; }
-        public DateTime? CreatedAt { get; set; }
-
+        public int RequestID { get; set; }
+        public string RequestorName { get; set; } = string.Empty;
+        public string? RequestDescription { get; set; }
+        public string? RequestTopic { get; set; }
+        public DateTime? RequestCreatedAt { get; set; }
     }
 }

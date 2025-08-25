@@ -5,11 +5,13 @@ namespace Requests.dal.Models;
 
 public partial class Request
 {
-    public int Code { get; set; }
+    public int RequestID { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string RequestorName { get; set; } = null!;
 
-    public string? Description { get; set; }
+    public string? RequestDescription { get; set; }
 
-    public DateTime? CreatedAt { get; set; }
+    public string? RequestTopic { get; set; }
+
+    public DateTime? RequestCreatedAt { get; set; }
 }

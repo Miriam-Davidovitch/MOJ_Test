@@ -1,0 +1,38 @@
+<div class="requests-container">
+    <div class="header-section">
+      <h2>רשימת פניות</h2>
+      <button 
+        *ngIf="!showAddForm" 
+        (click)="showAddRequestForm()" 
+        class="btn btn-primary">
+        הוספת בקשה חדשה
+      </button>
+    </div>
+
+    <app-add-request 
+      *ngIf="showAddForm"
+      (requestAdded)="onRequestAdded()"
+      (cancel)="onCancelAdd()">
+    </app-add-request>
+    
+    <table class="requests-table" *ngIf="!showAddForm">
+      <thead>
+        <tr>
+          <th>קוד פנייה</th>
+          <th>שם המגיש</th>
+          <th>נושא</th>
+          <th>תיאור</th>
+          <th>תאריך יצירה</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of requests">
+          <td>{{request.requestID}}</td>
+          <td>{{request.requestorName}}</td>
+          <td>{{request.requestTopic}}</td>
+          <td>{{request.requestDescription}}</td>
+          <td>{{request.requestCreatedAt | date:'dd/MM/yyyy HH:mm'}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
