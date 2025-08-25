@@ -75,6 +75,9 @@ ng serve
 ### תגובת API
 ![API Response](screenshots/api-response.png)
 
+### מסד נתונים 
+![מסד נתונים](screenshots/db.png)
+
 ## 📊 מבנה מסד הנתונים
 
 ### טבלת Requests
