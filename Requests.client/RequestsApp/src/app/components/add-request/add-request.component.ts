@@ -30,10 +30,12 @@ export class AddRequestComponent {
     
     // סימון כל השדות כמושים
     this.touched['requestorName'] = true;
+    this.touched['requestTopic'] = true;
     this.touched['requestDescription'] = true;
     
     // בדיקת כל השדות
     this.validateField('requestorName');
+    this.validateField('requestTopic');
     this.validateField('requestDescription');
     
     if (!this.validateForm()) {
@@ -115,6 +117,11 @@ export class AddRequestComponent {
       case 'requestorName':
         if (!this.requestorName.trim()) {
           this.errors['requestorName'] = 'שם המבקש חובה';
+        }
+        break;
+      case 'requestTopic':
+        if (this.requestTopic.trim() && this.requestTopic.trim().length < 5) {
+          this.errors['requestTopic'] = 'נושא הפניה חייב להיות לפחות 5 תווים';
         }
         break;
       case 'requestDescription':

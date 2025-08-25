@@ -1,60 +1,33 @@
-# Build results
-[Dd]ebug/
-[Dd]ebugPublic/
-[Rr]elease/
-[Rr]eleases/
-x64/
-x86/
-[Ww][Ii][Nn]32/
-[Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
-bld/
-[Bb]in/
-[Oo]bj/
-[Ll]og/
-[Ll]ogs/
-
-# Visual Studio 2015/2017 cache/options directory
+# .NET
+bin/
+obj/
+*.user
+*.suo
+*.cache
+*.dll
+*.pdb
+*.exe
 .vs/
 
-# Visual Studio Code
-.vscode/
-
-# User-specific files
-*.rsuser
-*.suo
-*.user
-*.userosscache
-*.sln.docstates
-
-# NuGet Packages
-*.nupkg
-packages/
-
-# Connection strings and secrets
-appsettings.json
-appsettings.Development.json
-appsettings.Production.json
-*.config
-
-# Database files
-*.mdf
-*.ldf
-*.db
-*.sqlite
-
-# Logs
+# Angular
+node_modules/
+dist/
+.angular/
 *.log
 
-# OS generated files
-.DS_Store
-.DS_Store?
-._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
-Thumbs.db
+# Database
+*.mdf
+*.ldf
 
-# Temporary files
-*.tmp
-*.temp
+# IDE
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+.DS_Store
+
+# Keep screenshots
+!screenshots/*.png
+!screenshots/*.jpg
+!screenshots/*.jpeg

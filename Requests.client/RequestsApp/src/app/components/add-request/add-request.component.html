@@ -36,7 +36,13 @@
         id="requestTopic" 
         name="requestTopic"
         [(ngModel)]="requestTopic" 
+        (blur)="onFieldBlur('requestTopic')"
+        (input)="onFieldChange('requestTopic')"
+        [class.error]="errors['requestTopic']"
         class="form-control">
+      <div *ngIf="errors['requestTopic']" class="error-message">
+        {{ errors['requestTopic'] }}
+      </div>
     </div>
 
     <div class="form-group">

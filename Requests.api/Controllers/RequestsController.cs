@@ -35,7 +35,10 @@ namespace Requests.api.Controllers
             if (string.IsNullOrWhiteSpace(dto.RequestorName))
                 return BadRequest(new { Success = false, Message = "שם המבקש חובה" });
 
-            if (dto.RequestDescription.Length > 255)
+            if (!string.IsNullOrWhiteSpace(dto.RequestTopic) && dto.RequestTopic.Length < 5)
+                return BadRequest(new { Success = false, Message = "נושא הפניה חייב להיות לפחות 5 תווים" });
+
+            if (dto.RequestDescription?.Length > 255)
                 return BadRequest(new { Success = false, Message = "התאור ארוך מדי" });
 
             try
